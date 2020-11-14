@@ -24,16 +24,12 @@ class Wall(pygame.sprite.Sprite):
 class mathMakesFun(pygame.sprite.Sprite):
     def calculateSpeedCollision(self):
         sumM = self.mass_1 + self.mass_2
-        print("durchlauf speed 2: {}".format(self.speed_2))
         newV_1 = (self.mass_1 - self.mass_2)/sumM * self.speed_1
         newV_2 = (self.mass_2-self.mass_1)/sumM * self.speed_2
         newV_1 += ((2 * self.mass_2 / sumM) * self.speed_2)
         newV_2 += ((2 * self.mass_1 / sumM) * self.speed_1)
         self.speed_1 = newV_1
         self.speed_2 = newV_2
-        #self.speed_1 = float((((self.mass_1 - self.mass_2) / (self.mass_1 + self.mass_2)) * self.speed_1) + ((self.mass_2 * 2) / (self.mass_1 + self.mass_2)) * self.speed_2)
-        #self.speed_2 = float(((((self.mass_2 * 2) / (self.mass_1 + self.mass_2)) * self.speed_1) + ((self.mass_2 - self.mass_1) / (self.mass_1 + self.mass_2)) * self.speed_2))
-
         print("speed nach collision ball: ", self.speed_1, self.speed_2)
         self.counter_collision += 1
         print("collisionen insgesamt: ", self.counter_collision)
@@ -79,39 +75,6 @@ class mathMakesFun(pygame.sprite.Sprite):
             else:
                 print("collision balls")
                 self.calculateSpeedCollision()
-
-    def start(self, speed2, mass1, mass2):
-        self.speed_1 = 0
-        self.speed_2 = speed2
-        self.mass_1 = mass1
-        self.mass_2 = mass2
-        self.x_1 = 200
-        self.x_2 = 750
-        self.wall_1 = 20
-        self.wall_2 = 780
-        self.radius_ball = 5
-        self.frame = 0
-        self.counter_collision = 0
-        self.y = 225
-        self.size = 2 * self.radius_ball
-        self.colour = (255, 255, 255)
-        self.thickness = 10
-        self.block_list = pygame.sprite.Group()
-        self.all_sprites_list = pygame.sprite.Group()
-        self.block_1 = Circle((225, 225, 225), 20, 15)
-        self.rect = self.image.get_rect()
-        self.block_1.rect.y = 225
-        self.block_1.rect.x = 50
-        self.block_2 = Circle((225, 225, 225), 20, 15)
-        self.block_2.rect.y = 225
-        self.block_2.rect.x = 750
-        self.cyrcle_1 = pygame.draw.circle(screen, self.colour, (self.x_1, self.y), self.size, self.thickness)
-        self.cyrcle_2 = pygame.draw.circle(screen, self.colour, (self.x_2, self.y), self.size, self.thickness)
-        self.block_list.add(self.block_1)
-        self.block_list.add(self.block_2)
-        self.all_sprites_list.add(self.block_1)
-        self.all_sprites_list.add(self.block_2)
-        self.all_cyrcle.add(self.cyrcle_2)
 
 
 pygame.init()
@@ -165,7 +128,7 @@ mmf.speed_1 = float(mmf.speed_1)
 mmf.speed_2 = -2
 mmf.speed_2 = float(mmf.speed_2)
 mmf.mass_1 = 1
-mmf.mass_2 = 1000
+mmf.mass_2 = 10
 mmf.counter_collision = 0
 
 running = True
