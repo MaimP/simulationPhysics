@@ -128,8 +128,10 @@ mmf.speed_1 = float(mmf.speed_1)
 mmf.speed_2 = -2
 mmf.speed_2 = float(mmf.speed_2)
 mmf.mass_1 = 1
-mmf.mass_2 = 10
+mmf.mass_2 = 100000
 mmf.counter_collision = 0
+
+font = pygame.font.Font(None, 50)
 
 running = True
 while running:
@@ -138,6 +140,9 @@ while running:
             running = False
 
     screen.fill(background_colour)
+    output_string = str(mmf.counter_collision)
+    text = font.render(output_string, True, (0, 0, 0))
+    screen.blit(text, [80, 20])
 
     mmf.checkCollide()
     mmf.calculatePosition()
